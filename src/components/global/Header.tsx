@@ -3,7 +3,7 @@ import Logo from './Logo';
 import { SlHeart } from 'react-icons/sl';
 import { IoPersonOutline } from 'react-icons/io5';
 import { BsCart3 } from 'react-icons/bs';
-import { TbSearch } from 'react-icons/tb';
+import SearchBar from '../SearchBar';
 
 export default function Header() {
   return (
@@ -14,17 +14,7 @@ export default function Header() {
 
       <div className="flex items-center justify-evenly md:py-2 md:px-3">
         <Logo />
-
-        <div className="flex">
-          <input
-            className="text-black font-medium rounded-l-md md:w-72 lg:w-96 md:pl-3 focus:outline-none placeholder:text-sm"
-            type="text"
-            placeholder="O que você está procurando ? "
-          />
-          <button className="bg-[#febd69] md:px-4 md:py-2 rounded-r-md">
-            <TbSearch className="md:h-5 md:w-4" />
-          </button>
-        </div>
+        <SearchBar />
 
         <div className="flex items-center md:gap-x-4 lg:gap-x-8">
           <button className="text-white flex items-center gap-x-1 cursor-pointer">
