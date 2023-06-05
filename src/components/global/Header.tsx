@@ -1,11 +1,20 @@
 import React from 'react';
 import Logo from './Logo';
+import NavigationBar from '../NavigationBar';
 import { SlHeart } from 'react-icons/sl';
 import { IoPersonOutline } from 'react-icons/io5';
 import { BsCart3 } from 'react-icons/bs';
 import SearchBar from '../SearchBar';
 
-export default function Header() {
+async function getCategories() {  
+  const request = await fetch(`${process.env.API_URL}/categories?fields[0]=name`);
+  const categories = await request.json();
+  return categories.data
+}
+
+export default async function Header() {
+  const categories = await getCategories();
+
   return (
     <header className="bg-header-bg w-100%">
       <div className="border-b border-b-[#3b4149]">
@@ -38,6 +47,8 @@ export default function Header() {
           </button>
         </div>
       </div>
+
+      <NavigationBar categories={categories}/>
     </header>
   );
 }
