@@ -28,6 +28,7 @@ export default function TopCategories({ categories }: TopCategoriesProps) {
                   src={`${apiUrl}${category.attributes.image.data.attributes.formats.small.url}`}
                   alt="Imagem que representa uma categoria de produtos"
                   fill
+                  sizes="(min-width: 375px) 100%"
                 />
               </div>
 
