@@ -17,7 +17,7 @@ export default function TopCategories({ categories }: TopCategoriesProps) {
         {categories.data.map((category, i) => (
           <li
             key={i}
-            className="flex-none w-[200px] h-[200px] border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200"
+            className=" bg-white flex-none w-[200px] h-[200px] border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200"
           >
             <Link
               href={`category/${category.id}`}

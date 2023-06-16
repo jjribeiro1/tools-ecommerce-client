@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-[#fafafa]`}>
         {/* @ts-expect-error async server component*/}
         <Header />
         {children}
