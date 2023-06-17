@@ -1,6 +1,7 @@
-import Header from '@/components/global/Header';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import Header from '@/components/global/Header';
+import Footer from '@/components/global/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,6 +17,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* @ts-expect-error async server component*/}
         <Header />
         {children}
+        {/* @ts-expect-error async server component*/}
+        <Footer/>
       </body>
     </html>
   );
