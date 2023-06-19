@@ -7,8 +7,8 @@ import { BsCart3 } from 'react-icons/bs';
 import SearchBar from '../SearchBar';
 
 async function getCategories() {  
-  const request = await fetch(`${process.env.API_URL}/categories?fields[0]=name`);
-  const categories = await request.json();
+  const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name`);
+  const categories = await response.json();
   return categories.data
 }
 

@@ -6,8 +6,8 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { TopCategories } from '@/types/top-categories';
 
 async function getCategories(): Promise<TopCategories> {
-  const request = await fetch(`${process.env.API_URL}/categories?fields[0]=name&filters[id][$lt]=6`);
-  const categories = await request.json();
+  const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name&filters[id][$lt]=6`);
+  const categories = await response.json();
   return categories;
 }
 
