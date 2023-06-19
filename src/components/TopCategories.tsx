@@ -4,13 +4,19 @@ import Link from 'next/link';
 import ContainerListCarousel from './ContainerListCarousel';
 import { TopCategories } from '@/types/top-categories';
 
-interface TopCategoriesProps {
-  categories: TopCategories;
+async function getTopCategories(): Promise<TopCategories> {
+  const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name&populate=image`, {
+    next: { revalidate: 60 * 60 * 24 },
+  });
+  const topCategories = response.json();
+  return topCategories;
 }
 
 const apiUrl = process.env.NEXT_PUBLIC_STRAPI_ASSETS_URL;
 
-export default function TopCategories({ categories }: TopCategoriesProps) {
+export default async function TopCategories() {
+  const categories = await getTopCategories();
+
   return (
     <section className="lg:my-12 lg:mx-8">
       <ContainerListCarousel title="Categorias Populares" scrollWidth={270}>

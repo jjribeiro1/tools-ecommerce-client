@@ -3,13 +3,21 @@ import ContainerListCarousel from './ContainerListCarousel';
 import ProductCard from './ProductCard';
 import { Product } from '@/types/product';
 
-interface DailyDealsProps {
-  products: {
-    data: Product[];
-  };
+interface DailyDeals {
+  data: Product[];
 }
 
-export default function DailyDeals({ products }: DailyDealsProps) {
+async function getDailyDeals(): Promise<DailyDeals> {
+  const response = await fetch(`${process.env.API_URL}/products?populate=images&filters[dailyDeal]=true`, {
+    next: { revalidate: 60 * 60 * 24 },
+  });
+  const dailyDeals = response.json();
+  return dailyDeals;
+}
+
+export default async function DailyDeals() {
+  const products = await getDailyDeals();
+
   return (
     <section className="lg:my-12 lg:mx-8">
       <ContainerListCarousel title="Ofertas do dia" scrollWidth={350}>
