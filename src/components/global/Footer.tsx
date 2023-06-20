@@ -57,9 +57,6 @@ export default async function Footer() {
               <Link href={'/privacy-policy'}>Política de privacidade</Link>
             </li>
             <li className="hover:text-[#febd69] transition-colors duration-200 cursor-pointer">
-              <Link href={'/refund-policy'}>Política de reembolso</Link>
-            </li>
-            <li className="hover:text-[#febd69] transition-colors duration-200 cursor-pointer">
               <Link href={'/terms'}>Termos e condições</Link>
             </li>
           </ul>
