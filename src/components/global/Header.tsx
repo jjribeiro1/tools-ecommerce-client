@@ -6,10 +6,10 @@ import { IoPersonOutline } from 'react-icons/io5';
 import { BsCart3 } from 'react-icons/bs';
 import SearchBar from '../SearchBar';
 
-async function getCategories() {  
+async function getCategories() {
   const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name`);
   const categories = await response.json();
-  return categories.data
+  return categories.data;
 }
 
 export default async function Header() {
@@ -21,24 +21,23 @@ export default async function Header() {
         <h1 className="text-white text-center text-xs sm:text-sm py-2">Frete grátis para todo o Brasil</h1>
       </div>
 
-      <div className="flex items-center justify-evenly md:py-2 md:px-3">
+      <div className="flex items-center justify-between md:justify-evenly p-2 md:py-2 md:px-3">
         <Logo />
         <SearchBar />
 
-        <div className="flex items-center md:gap-x-4 lg:gap-x-8">
+        <div className="flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-8 mr-4">
           <button className="text-white flex items-center gap-x-1 cursor-pointer">
-            <SlHeart className="text-white md:h-7 md:w-7" />
-            <div className="md:text-xs lg:text-sm flex flex-col justify-center items-center">
-              <span>Meus</span>
-              <span>Favoritos</span>
+            <SlHeart className="text-white h-4 w-4 md:h-7 md:w-7" />
+            <div className="text-[10px] md:text-xs lg:text-sm flex flex-col justify-center items-center">
+              <span className="hidden sm:inline">Meus</span>
+              <span className="hidden sm:inline">Favoritos</span>
             </div>
           </button>
 
           <button className="text-white flex items-center gap-x-1 cursor-pointer">
-            <IoPersonOutline className="text-white md:h-7 md:w-7" />
-            <div className="md:text-xs lg:text-sm flex flex-col justify-center items-center">
-              <span>Entre ou</span>
-              <span>Cadastre-se</span>
+            <IoPersonOutline className="text-white h-4 w-4 md:h-7 md:w-7" />
+            <div className="text-[10px] md:text-xs lg:text-sm flex flex-col justify-center items-center">
+              <span>olá, faça seu login</span>
             </div>
           </button>
 
@@ -48,7 +47,7 @@ export default async function Header() {
         </div>
       </div>
 
-      <NavigationBar categories={categories}/>
+      <NavigationBar categories={categories} />
     </header>
   );
 }
