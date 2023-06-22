@@ -19,12 +19,12 @@ export default async function HeroSection() {
 
   return (
     <>
-      <section className="grid lg:grid-cols-2 lg:gap-6 w-full lg:h-[450px] xl:h-[500px] ">
+      <section className="grid grid-cols-1 gap-4 w-full h-min lg:grid-cols-2 lg:gap-6 lg:h-[450px] xl:h-[500px] ">
         <HeroSlider slides={slides.data} />
 
-        <div className="lg:grid lg:grid-cols-2 lg:gap-4">
+        <div className="grid grid-cols-2 gap-2 md:max-lg:flex md:max-lg:items-center lg:gap-4">
           {banners.data.map((banner, i) => (
-            <div key={i} className="relative w-full h-full overflow-hidden">
+            <div key={i} className="relative w-full h-40 lg:h-full overflow-hidden">
               <Image
                 src={`${apiUrl}${banner.attributes.formats.small.url}`}
                 alt={'Banner de um produto a venda'}
