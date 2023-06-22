@@ -18,7 +18,7 @@ export default async function TopCategories() {
   const categories = await getTopCategories();
 
   return (
-    <section className="lg:my-12 lg:mx-8">
+    <section className="my-8 lg:my-12 lg:mx-8">
       <ContainerListCarousel title="Categorias Populares" scrollWidth={270}>
         {categories.data.map((category, i) => (
           <li
