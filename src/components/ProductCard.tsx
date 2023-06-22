@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { VscArrowSmallDown } from 'react-icons/vsc';
 import { Product } from '@/types/product';
+import { convertCentsToReal } from '@/utils/convert-cents-to-real';
 
 interface ProductCardProps {
   product: Product;
@@ -43,7 +44,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               <span className=" inline-flex gap-1">
                 por:
                 <strong className="text-slate-900">
-                  R$ {(product.attributes.promotionalPrice / 100).toFixed(2)}
+                  R$ {convertCentsToReal(product.attributes.promotionalPrice)}
                 </strong>
               </span>
             </div>
@@ -53,7 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <span className=" inline-flex gap-1">
               por:
               <strong className="text-slate-900">
-                R$ {(product.attributes.promotionalPrice / 100).toFixed(2)}
+                R$ {convertCentsToReal(product.attributes.promotionalPrice)}
               </strong>
             </span>
           </div>
