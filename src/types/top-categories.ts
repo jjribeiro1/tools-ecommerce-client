@@ -11,3 +11,12 @@ export interface TopCategories {
     };
   }[];
 }
+
+export interface Categories {
+  data: {
+    id: number;
+    attributes: {
+      name: string;
+    };
+  }[]
+}
