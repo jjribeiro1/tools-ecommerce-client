@@ -24,7 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="first-letter:capitalize">{product.attributes.name}</span>
+        <h2 className="first-letter:capitalize">{product.attributes.name}</h2>
 
         {product.attributes.discountIsActive ? (
           <div className="flex flex-col gap-1 w-full">
@@ -44,7 +44,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               <span className=" inline-flex gap-1">
                 por:
                 <strong className="text-slate-900">
-                  R$ {convertCentsToReal(product.attributes.promotionalPrice)}
+                  {convertCentsToReal(product.attributes.promotionalPrice)}
                 </strong>
               </span>
             </div>
@@ -54,7 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <span className=" inline-flex gap-1">
               por:
               <strong className="text-slate-900">
-                R$ {convertCentsToReal(product.attributes.promotionalPrice)}
+                {convertCentsToReal(product.attributes.promotionalPrice)}
               </strong>
             </span>
           </div>

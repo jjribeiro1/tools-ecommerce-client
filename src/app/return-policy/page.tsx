@@ -2,10 +2,10 @@ import React from 'react';
 
 export default function ReturnPolicy() {
   return (
-    <article className="flex flex-col justify-center items-center gap-10 py-7 mx-20">
-      <h1 className="text-4xl lg:text-5xl ">Política de troca e devolução</h1>
+    <article className="flex flex-col justify-center items-center gap-5 md:gap-10 py-3 md:py-7 mx-2 sm:mx-5 md:mx-20">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl">Política de troca e devolução</h1>
 
-      <header className="text-2xl">
+      <header className="text-xl md:text-2xl">
         Na <strong>CASA DAS FERRAMENTAS</strong>, valorizamos a satisfação de nossos clientes e buscamos
         fornecer produtos de alta qualidade. Entendemos que, às vezes, você pode precisar trocar ou devolver
         um produto. Esta política de troca e devolução foi criada para garantir que o processo seja simples,
@@ -15,8 +15,8 @@ export default function ReturnPolicy() {
 
       <section className="flex flex-col">
         <section>
-          <h3 className="text-xl my-8">1 - Trocas e devoluções gerais:</h3>
-          <ul className="list-disc text-lg">
+          <h3 className="text-lg md:text-xl my-8">1 - Trocas e devoluções gerais:</h3>
+          <ul className="list-disc text-base md:text-lg">
             <li>Aceitamos trocas e devoluções de produtos não utilizados e em perfeitas condições.</li>
             <li>
               O prazo para solicitar trocas ou devoluções é de até 30 dias. Passados os 30 dias da compra,
@@ -34,16 +34,16 @@ export default function ReturnPolicy() {
         </section>
 
         <section>
-          <h3 className="text-lg my-8">2 - Condições para trocas e devoluções:</h3>
-          <ul className="list-disc text-lg">
+          <h3 className="text-base md:text-lg my-8">2 - Condições para trocas e devoluções:</h3>
+          <ul className="list-disc text-base md:text-lg">
             <li>O produto deve estar em sua embalagem original, sem danos ou sinais de uso.</li>
             <li>Todos os acessórios, manuais e peças que acompanham o produto devem ser devolvidos.</li>
           </ul>
         </section>
 
         <section>
-          <h3 className="text-lg my-8">3 - Trocas:</h3>
-          <ul className="list-disc text-lg">
+          <h3 className="text-base md:text-lg my-8">3 - Trocas:</h3>
+          <ul className="list-disc text-base md:text-lg">
             <li>Apenas substituímos produtos se estiverem com defeito de fabricação ou danificados</li>
             <li>
               Em caso de troca, você poderá escolher um produto equivalente de valor igual ou pagar a
@@ -61,8 +61,8 @@ export default function ReturnPolicy() {
         </section>
 
         <section>
-          <h3 className="text-lg my-8">4 - Devoluções:</h3>
-          <ul className="list-disc text-lg">
+          <h3 className="text-base md:text-lg my-8">4 - Devoluções:</h3>
+          <ul className="list-disc text-base md:text-lg">
             <li>O reembolso será efetuado após a verificação e aprovação da condição do produto devolvido</li>
             <li>
               Dependendo de onde você mora, o tempo de frete de devolução pode variar (confira nossa página de

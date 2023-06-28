@@ -5,7 +5,7 @@ import DailyDeals from '@/components/DailyDeals';
 
 export default async function Home() {
   return (
-    <main className="h-full w-full p-3 md:px-10 lg:px-5 lg:py-12">
+    <main className="h-full w-full p-2 md:p-5 lg:py-12">
       <HeroSection />
       <TopCategories />
       <DailyDeals />
