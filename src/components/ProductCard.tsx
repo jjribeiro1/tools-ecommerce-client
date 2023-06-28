@@ -12,14 +12,14 @@ const apiUrl = process.env.NEXT_PUBLIC_STRAPI_ASSETS_URL;
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <li className="bg-white flex flex-col flex-none h-[330px] w-[210px] gap-2 lg:h-[380px] lg:w-[260px] lg:gap-4 p-2 border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200 cursor-pointer">
-      <div className="relative w-full h-[200px] lg:h-[250px]">
+    <li className="bg-white flex flex-col flex-none h-[370px] w-[241px] xl:w-[266px] gap-2 lg:gap-4 p-2 border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200 cursor-pointer">
+      <div className="relative h-[225px] w-[225px] xl:h-[250px] xl:w-[250px]">
         <Image
           src={`${apiUrl}${product.attributes.images.data.at(0)?.attributes.url}`}
           alt={`Oferta de ${product.attributes.name} em um preço mais baixo que o normal`}
           fill
           sizes="(min-width: 375px) 100%"
-          className="object-cover"
+          className="object-center"
         />
       </div>
 
