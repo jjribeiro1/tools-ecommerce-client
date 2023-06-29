@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Product } from '@/types/product';
 import ProductList from './ProductList';
 import ProductSortBar from './ProductSortBar';
+import Spinner from './Spinner';
 
 interface ProductsFromCategoryProps {
   categoryId: number;
@@ -22,7 +23,7 @@ export default function ProductsFromCategory({ categoryId }: ProductsFromCategor
     return products.data as Product[];
   };
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [`productsFromCategory${categoryId}${queryOptions[queryIndex]}`],
     queryFn: getProductsFromCategory,
     refetchOnWindowFocus: false,
@@ -30,9 +31,15 @@ export default function ProductsFromCategory({ categoryId }: ProductsFromCategor
   });
 
   return (
-    <div className="flex flex-col gap-4 ">
+    <>
       <ProductSortBar selectOptions={selectOptions} queryIndex={queryIndex} setQueryIndex={setQueryIndex} />
+      {isLoading && (
+        <div className="self-center mt-14 h-[684px]">
+          <Spinner />
+        </div>
+      )}
+
       <ProductList products={data as Product[]} />
-    </div>
+    </>
   );
 }

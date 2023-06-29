@@ -27,7 +27,7 @@ export default async function Category({ params }: any) {
         </ul>
       </div>
 
-      <div className="w-[70%] lg:w-[80%]">
+      <div className="w-[70%] lg:w-[80%] flex flex-col gap-4">
         <ProductsFromCategory categoryId={params.id} />
       </div>
     </section>
