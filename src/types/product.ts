@@ -1,4 +1,5 @@
 import { StrapiImage } from './strapi-image';
+import { Categories } from './top-categories';
 
 export interface Product {
   id: number;
@@ -13,7 +14,8 @@ export interface Product {
     discountIsActive: boolean;
     dailyDeal: boolean;
     images: {
-      data: StrapiImage[]
+      data: StrapiImage[];
     };
+    categories: Categories
   };
 }
