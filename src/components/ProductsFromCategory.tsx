@@ -32,7 +32,12 @@ export default function ProductsFromCategory({ categoryId }: ProductsFromCategor
 
   return (
     <>
-      <ProductSortBar selectOptions={selectOptions} queryIndex={queryIndex} setQueryIndex={setQueryIndex} />
+      <ProductSortBar
+        selectOptions={selectOptions}
+        queryIndex={queryIndex}
+        setQueryIndex={setQueryIndex}
+        productsCount={data?.length as number}
+      />
       {isLoading && (
         <div className="self-center mt-14 h-[684px]">
           <Spinner />
