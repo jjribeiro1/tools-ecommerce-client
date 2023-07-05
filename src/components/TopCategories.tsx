@@ -2,12 +2,16 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ContainerListCarousel from './ContainerListCarousel';
-import { TopCategories } from '@/types/top-categories';
+import { PopularCategoriesFetchResponse } from '@/types/category';
 
-async function getTopCategories(): Promise<TopCategories> {
-  const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name&populate=image`, {
-    next: { revalidate: 60 * 60 * 24 },
-  });
+async function getTopCategories(): Promise<PopularCategoriesFetchResponse> {
+  const response = await fetch(
+    `${process.env.API_URL}/categories?filters[isPopular][$eq]=true&populate=image`,
+    {
+      next: { revalidate: 60 * 60 * 24 },
+    }
+  );
+
   const topCategories = response.json();
   return topCategories;
 }

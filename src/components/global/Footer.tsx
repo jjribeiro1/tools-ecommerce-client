@@ -3,17 +3,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import WhatsAppButton from '../../../public/WhatsAppButtonWhiteSmall.png';
 import { AiOutlineMail } from 'react-icons/ai';
-import { TopCategories } from '@/types/top-categories';
+import { CategoriesFetchResponse } from '@/types/category';
 
-async function getCategories(): Promise<TopCategories> {
+async function getCategories(): Promise<CategoriesFetchResponse> {
   const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name&filters[id][$lt]=6`);
-  const categories = await response.json();
+  const categories = response.json();
   return categories;
 }
 
 export default async function Footer() {
-  const year = new Date().getFullYear();
   const categories = await getCategories();
+  const year = new Date().getFullYear();
 
   return (
     <footer className="bg-[#232f3e] text-white flex flex-col">

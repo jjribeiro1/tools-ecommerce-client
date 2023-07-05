@@ -1,5 +1,5 @@
+import { Category } from './category';
 import { StrapiImage } from './strapi-image';
-import { Categories } from './top-categories';
 
 export interface Product {
   id: number;
@@ -16,6 +16,28 @@ export interface Product {
     images: {
       data: StrapiImage[];
     };
-    categories: Categories
+    categories: {
+      data: Category[];
+    };
   };
+}
+
+export interface DailyDealsFetchResponse {
+  data: {
+    id: number;
+    attributes: {
+      name: string;
+      createdAt: Date;
+      updatedAt: Date;
+      publishedAt: Date;
+      originalPrice: number;
+      promotionalPrice: number;
+      discountPercentage: number;
+      discountIsActive: true;
+      dailyDeal: true;
+      images: {
+        data: StrapiImage[];
+      };
+    };
+  }[];
 }

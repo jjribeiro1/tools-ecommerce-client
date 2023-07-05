@@ -1,9 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { VscArrowSmallDown } from 'react-icons/vsc';
 import { Product } from '@/types/product';
 import { convertCentsToReal } from '@/utils/convert-cents-to-real';
-import Link from 'next/link';
 
 interface ProductCardProps {
   product: Product;

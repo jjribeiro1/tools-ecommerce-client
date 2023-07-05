@@ -1,18 +1,14 @@
 import React from 'react';
 import ContainerListCarousel from './ContainerListCarousel';
 import ProductCard from './ProductCard';
-import { Product } from '@/types/product';
+import { DailyDealsFetchResponse } from '@/types/product';
 
-interface DailyDeals {
-  data: Product[];
-}
-
-async function getDailyDeals(): Promise<DailyDeals> {
+async function getDailyDeals(): Promise<DailyDealsFetchResponse> {
   const response = await fetch(`${process.env.API_URL}/products?populate=images&filters[dailyDeal]=true`, {
     next: { revalidate: 60 * 60 * 24 },
   });
   const dailyDeals = response.json();
-  return dailyDeals;
+  return dailyDeals
 }
 
 export default async function DailyDeals() {

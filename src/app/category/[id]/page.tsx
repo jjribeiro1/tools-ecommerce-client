@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { Categories } from '@/types/top-categories';
 import ProductsFromCategory from '@/components/ProductsFromCategory';
+import { CategoriesFetchResponse } from '@/types/category';
 
-async function getCategories(): Promise<Categories> {
+async function getCategories(): Promise<CategoriesFetchResponse> {
   const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name`, {
     next: { revalidate: 60 * 60 * 24 },
   });
