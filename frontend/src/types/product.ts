@@ -1,27 +1,18 @@
-import { Category } from './category';
-import { StrapiImage } from './strapi-image';
+import { ImageSource } from '@/lib/sanity';
 
 export interface Product {
-  id: number;
-  attributes: {
-    name: string;
-    createdAt: Date;
-    updatedAt: Date;
-    publishedAt: Date;
-    originalPrice: number;
-    promotionalPrice: number;
-    discountPercentage: number;
-    discountIsActive: boolean;
-    dailyDeal: boolean;
-    images: {
-      data: StrapiImage[];
-    };
-    categories: {
-      data: Category[];
-    };
+  _id: string;
+  name: string;
+  slug: {
+    current: string;
   };
-}
-
-export interface DailyDealsFetchResponse {
-  data: Product[];
+  price: number;
+  promotionalPrice: number;
+  discountPercentage: number;
+  discountIsActive: boolean;
+  dailyDeal: boolean;
+  description: string;
+  createdAt: Date;
+  updatedAt: Date;
+  images: ImageSource[];
 }

@@ -1,38 +1,19 @@
-import { StrapiImage } from './strapi-image';
+import { ImageSource } from '@/lib/sanity';
 
-export interface Category {
-  id: number;
-  attributes: {
-    name: string;
-    createdAt: Date;
-    updatedAt: Date;
-    publishedAt: Date;
-    isPopular: boolean;
-    image: StrapiImage;
+export interface CategoryOverview {
+  _id: string;
+  name: string;
+  slug: {
+    current: string;
   };
 }
 
-export interface PopularCategoriesFetchResponse {
-  data: {
-    id: number;
-    attributes: {
-      name: string;
-      createdAt: Date;
-      updatedAt: Date;
-      publishedAt: Date;
-      isPopular: boolean;
-      image: {
-        data: StrapiImage;
-      };
-    };
-  }[];
-}
-
-export interface CategoriesFetchResponse {
-  data: {
-    id: number;
-    attributes: {
-      name: string;
-    };
-  }[];
+export interface PopularCategories {
+  _id: string;
+  name: string;
+  slug: {
+    current: string;
+  };
+  image: ImageSource
+  isPopular: boolean;
 }
