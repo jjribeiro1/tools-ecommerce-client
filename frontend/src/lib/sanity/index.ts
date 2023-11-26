@@ -5,8 +5,8 @@ import imageUrlBuilder from '@sanity/image-url';
 export type ImageSource = SanityImageSource
 
 export const sanityClient = createClient({
-    projectId: process.env.SANITY_STUDIO_PROJECT_ID,
-    dataset: process.env.SANITY_STUDIO_DATASET,
+    projectId: process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET,
     apiVersion: '2023-11-25',
     useCdn: true
 })
