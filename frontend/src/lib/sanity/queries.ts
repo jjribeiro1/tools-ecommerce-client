@@ -24,11 +24,10 @@ async function fetchDailyDealsProducts() {
 }
 const getDailyDeals = cache(fetchDailyDealsProducts);
 
-async function fetchProductsFromCategorySlug(slug: string) {
+async function getProductsFromCategorySlug(slug: string) {
   const query = `*[_type == 'product' && category->slug.current == '${slug}']`;
   const data = await sanityClient.fetch<Product[]>(query);
   return data;
 }
-const getProductsFromCategorySlug = cache(fetchProductsFromCategorySlug);
 
 export { getCategoriesOverview, getPopularCategories, getDailyDeals, getProductsFromCategorySlug };
