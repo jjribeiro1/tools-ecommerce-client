@@ -3,33 +3,27 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Product } from '@/types/product';
 import ProductList from './ProductList';
+import { getProductsFromCategorySlug } from '@/lib/sanity/queries';
 import ProductSortBar from './ProductSortBar';
 import Spinner from './Spinner';
 
 interface ProductsFromCategoryProps {
-  categoryId: number;
+  categorySlug: string;
 }
 
-export default function ProductsFromCategory({ categoryId }: ProductsFromCategoryProps) {
+export default function ProductsFromCategory({ categorySlug }: ProductsFromCategoryProps) {
   const [queryIndex, setQueryIndex] = useState(0);
   const selectOptions = ['Preço, menor para maior', 'Preço, maior para menor'];
   const queryOptions = ['&sort[0]=promotionalPrice:asc', '&sort[0]=promotionalPrice:desc'];
 
-  const getProductsFromCategory = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/products?populate=*&filters[categories][id][$eq]=${categoryId}${queryOptions[queryIndex]}`
-    );
-    const products = await response.json();
-    return products.data as Product[];
-  };
-
   const { data, isLoading } = useQuery({
-    queryKey: [`productsFromCategory${categoryId}${queryOptions[queryIndex]}`],
-    queryFn: getProductsFromCategory,
-    refetchOnWindowFocus: false,
-    retry: false,
+    queryKey: ['products-from-category', categorySlug],
+    queryFn: () => getProductsFromCategorySlug(categorySlug),
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 5,
+    enabled: !!categorySlug
   });
-
+  
   return (
     <>
       <ProductSortBar
