@@ -3,16 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import WhatsAppButton from '../../../public/WhatsAppButtonWhiteSmall.png';
 import { AiOutlineMail } from 'react-icons/ai';
-import { CategoriesFetchResponse } from '@/types/category';
+import { getCategoriesOverview } from '@/lib/sanity/queries';
 
-async function getCategories(): Promise<CategoriesFetchResponse> {
-  const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name&filters[id][$lt]=6`);
-  const categories = response.json();
-  return categories;
-}
 
 export default async function Footer() {
-  const categories = await getCategories();
+  const categories = await getCategoriesOverview();
   const year = new Date().getFullYear();
 
   return (
@@ -65,12 +60,12 @@ export default async function Footer() {
         <section className="flex flex-col items-center gap-2 md:gap-4">
           <h2 className="font-bold text-sm sm:text-base md:text-lg">Categorias</h2>
           <ul className="flex flex-col gap-2">
-            {categories.data.map((category, i) => (
+            {categories.map((category, i) => (
               <li
                 key={i}
                 className="text-xs sm:text-sm md:text-base first-letter:uppercase hover:text-[#febd69] transition-colors duration-200"
               >
-                <Link href={`category/${category.id}`}>{category.attributes.name}</Link>
+                <Link href={`category/${category.slug.current}`}>{category.name}</Link>
               </li>
             ))}
           </ul>

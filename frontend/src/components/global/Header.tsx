@@ -1,20 +1,14 @@
 import React from 'react';
 import Logo from './Logo';
-import NavigationBar from '../NavigationBar';
-import SearchBar from '../SearchBar';
 import { SlHeart } from 'react-icons/sl';
 import { IoPersonOutline } from 'react-icons/io5';
 import { BsCart3 } from 'react-icons/bs';
-import { CategoriesFetchResponse } from '@/types/category';
-
-async function getCategories(): Promise<CategoriesFetchResponse> {
-  const response = await fetch(`${process.env.API_URL}/categories?fields[0]=name`);
-  const categories = response.json();
-  return categories
-}
+import NavigationBar from '../NavigationBar';
+import SearchBar from '../SearchBar';
+import { getCategoriesOverview } from '@/lib/sanity/queries';
 
 export default async function Header() {
-  const categories = await getCategories();  
+  const categories = await getCategoriesOverview()    
 
   return (
     <header className="bg-header-bg w-100%">

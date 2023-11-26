@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { Root, List, Item, Trigger, Content } from '@radix-ui/react-navigation-menu';
 import { BiDialpadAlt } from 'react-icons/bi';
 import { TbChevronDown } from 'react-icons/tb';
-import { CategoriesFetchResponse } from '@/types/category';
+import { CategoryOverview } from '@/types/category';
 
 interface NavigationBarProps {
-  categories: CategoriesFetchResponse;
+  categories: CategoryOverview[];
 }
 
 export default function NavigationBar({ categories }: NavigationBarProps) {
@@ -38,13 +38,13 @@ export default function NavigationBar({ categories }: NavigationBarProps) {
             onPointerLeave={(e) => e.preventDefault()}
           >
             <ul className="flex flex-col divide-y divide-slate-700/70 cursor-pointer">
-              {categories.data.map((category) => (
+              {categories.map((category) => (
                 <li
-                  key={category.id}
+                  key={category._id}
                   className="hover:text-[#febd69] text-sm lg:text-base p-1 px-2 md:p-2 lg:px-4 lg:py-3"
                 >
-                  <Link href={`/category/${category.id}`} className="inline-block min-w-full">
-                    {category.attributes.name}
+                  <Link href={`/category/${category.slug.current}`} className="inline-block min-w-full">
+                    {category.name}
                   </Link>
                 </li>
               ))}
