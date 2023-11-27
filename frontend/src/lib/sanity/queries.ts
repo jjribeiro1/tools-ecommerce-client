@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import { CategoryOverview, PopularCategories } from '@/types/category';
 import { sanityClient } from '.';
-import { Product } from '@/types/product';
+import { Product, ProductWithCategory } from '@/types/product';
 
 async function fetchCategoriesOverview() {
   const query = `*[_type == 'category']{_id, name, slug}`;
@@ -25,16 +25,19 @@ async function fetchDailyDealsProducts() {
 const getDailyDeals = cache(fetchDailyDealsProducts);
 
 async function getProductsFromCategorySlug(slug: string, priceOrder: string) {
-  const query = `*[_type == 'product' && category->slug.current == '${slug}'] | order(price ${priceOrder ?? ''})`;
+  const query = `*[_type == 'product' && category->slug.current == '${slug}'] | order(price ${
+    priceOrder ?? ''
+  })`;
   const data = await sanityClient.fetch<Product[]>(query);
   return data;
 }
 
-async function getProductBySlug(slug: string) {
-  const query = `*[_type == 'product' && slug.current == '${slug}'][0]`;
-  const data = await sanityClient.fetch<Product>(query);
+async function fetchProductBySlug(slug: string) {
+  const query = `*[_type == 'product' && slug.current == '${slug}']{_id, name, slug, price, promotionalPrice, discountPercentage, discountIsActive, dailyDeal, description, images, category->{name, slug}}[0]`;
+  const data = await sanityClient.fetch<ProductWithCategory>(query);
   return data;
 }
+const getProductBySlug = cache(fetchProductBySlug);
 
 export {
   getCategoriesOverview,
