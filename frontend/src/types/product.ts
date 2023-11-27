@@ -1,4 +1,5 @@
 import { ImageSource } from '@/lib/sanity';
+import { CategoryOverview } from './category';
 
 export interface Product {
   _id: string;
@@ -15,4 +16,8 @@ export interface Product {
   createdAt: Date;
   updatedAt: Date;
   images: ImageSource[];
+}
+
+export interface ProductWithCategory extends Product {
+  category: CategoryOverview;
 }
