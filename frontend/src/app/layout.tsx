@@ -1,5 +1,6 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
 import Header from '@/components/global/Header';
 import Footer from '@/components/global/Footer';
 import Providers from '@/Providers';
@@ -13,13 +14,15 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
-      <body className={`${inter.className} bg-[#fafafa] max-w-screen-2xl my-0 mx-auto`}>
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
-      </body>
+      <ClerkProvider>
+        <body className={`${inter.className} bg-[#fafafa] max-w-screen-2xl my-0 mx-auto`}>
+          <Providers>
+            <Header />
+            {children}
+            <Footer />
+          </Providers>
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
