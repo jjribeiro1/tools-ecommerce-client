@@ -20,18 +20,16 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
   };
 
   useEffect(() => {
-    let autoPlayTimer: NodeJS.Timer;
-
     if (autoPlay) {
-      autoPlayTimer = setInterval(() => {
-        const isLastIndex = currentIndex === slides.length - 1;
+      const autoPlayTimer = setInterval(() => {
+      const isLastIndex = currentIndex === slides.length - 1;
         setCurrentIndex(isLastIndex ? 0 : (prevState) => prevState + 1);
       }, 5000);
+      return () => {
+        clearInterval(autoPlayTimer);
+      };
     }
 
-    return () => {
-      clearInterval(autoPlayTimer);
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 
