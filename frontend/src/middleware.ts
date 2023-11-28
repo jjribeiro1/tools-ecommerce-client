@@ -8,7 +8,7 @@ export default authMiddleware({
     '/delivery-policy',
     '/privacy-policy',
     '/return-policy',
-    'terms',
+    '/terms',
   ],
 });
 
