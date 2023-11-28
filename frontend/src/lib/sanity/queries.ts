@@ -2,6 +2,7 @@ import { cache } from 'react';
 import { CategoryOverview, PopularCategories } from '@/types/category';
 import { sanityClient } from '.';
 import { Product, ProductWithCategory } from '@/types/product';
+import { HeroSection } from '@/types/hero-section';
 
 async function fetchCategoriesOverview() {
   const query = `*[_type == 'category']{_id, name, slug}`;
@@ -39,10 +40,18 @@ async function fetchProductBySlug(slug: string) {
 }
 const getProductBySlug = cache(fetchProductBySlug);
 
+async function fetchHeroSectionData() {
+  const query = `*[_type == 'heroSection'][0]`
+  const data = await sanityClient.fetch<HeroSection>(query)
+  return data
+}
+const getHeroSectionData = cache(fetchHeroSectionData)
+
 export {
   getCategoriesOverview,
   getPopularCategories,
   getDailyDeals,
   getProductsFromCategorySlug,
   getProductBySlug,
+  getHeroSectionData
 };

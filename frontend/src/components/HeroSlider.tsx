@@ -1,13 +1,11 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { StrapiImage } from '@/types/strapi-image';
+import { ImageSource, urlFor } from '@/lib/sanity';
 
 interface HeroSliderProps {
-  slides: StrapiImage[];
+  slides: ImageSource[];
 }
-
-const apiUrl = process.env.NEXT_PUBLIC_STRAPI_ASSETS_URL;
 
 export default function HeroSlider({ slides }: HeroSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,7 +40,7 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
       {slides.map((slide, i) => (
         <Image
           key={i}
-          src={`${apiUrl}${slide.attributes.formats.small.url}`}
+          src={urlFor(slide).url()}
           alt="Imagem de um produto"
           fill
           sizes="(min-width: 375px) 100%"
