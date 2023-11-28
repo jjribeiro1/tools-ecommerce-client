@@ -13,8 +13,8 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-br">
-      <ClerkProvider>
+    <ClerkProvider>
+      <html lang="pt-br">
         <body className={`${inter.className} bg-[#fafafa] max-w-screen-2xl my-0 mx-auto`}>
           <Providers>
             <Header />
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </Providers>
         </body>
-      </ClerkProvider>
-    </html>
+      </html>
+    </ClerkProvider>
   );
 }
