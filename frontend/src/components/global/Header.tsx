@@ -1,14 +1,17 @@
 import React from 'react';
-import { UserButton } from '@clerk/nextjs';
-import Logo from './Logo';
+import Link from 'next/link';
+import { UserButton, currentUser } from '@clerk/nextjs';
+import { HiOutlineUserCircle } from 'react-icons/hi2';
 import { SlHeart } from 'react-icons/sl';
 import { BsCart3 } from 'react-icons/bs';
+import Logo from './Logo';
 import NavigationBar from '../NavigationBar';
 import SearchBar from '../SearchBar';
 import { getCategoriesOverview } from '@/lib/sanity/queries';
 
 export default async function Header() {
   const categories = await getCategoriesOverview();
+  const loggedUser = await currentUser();
 
   return (
     <header className="bg-header-bg w-100%">
@@ -28,7 +31,17 @@ export default async function Header() {
               <span className="hidden sm:inline">Favoritos</span>
             </div>
           </button>
-          <UserButton afterSignOutUrl="/" />
+          {loggedUser ? (
+            <UserButton afterSignOutUrl='/'/>
+          ) : (
+            <div className="flex items-center gap-1">
+              <HiOutlineUserCircle className="text-white h-5 w-5 md:w-8 md:h-8" />
+              <Link href={'/sign-in'} className="text-white text-sm cursor-pointer hover:text-gray-300">
+                Olá, faça seu login
+              </Link>
+            </div>
+          )}
+
           <button className="cursor-pointer">
             <BsCart3 className="text-[#febd69] md:h-7 md:w-7" />
           </button>

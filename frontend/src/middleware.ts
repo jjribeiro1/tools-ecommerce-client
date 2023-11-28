@@ -1,11 +1,17 @@
-import { authMiddleware } from "@clerk/nextjs";
- 
-//TODO: FIX public and private routes later
+import { authMiddleware } from '@clerk/nextjs';
+
 export default authMiddleware({
-  publicRoutes: ['/'],
+  publicRoutes: [
+    '/',
+    '/category/:path*',
+    '/product/:path*',
+    '/delivery-policy',
+    '/privacy-policy',
+    '/return-policy',
+    'terms',
+  ],
 });
- 
+
 export const config = {
-  matcher: ['/category/:path*', '/'],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 };
- 
