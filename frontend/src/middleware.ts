@@ -9,6 +9,7 @@ export default authMiddleware({
     '/privacy-policy',
     '/return-policy',
     '/terms',
+    "/api/webhooks(.*)"
   ],
 });
 
