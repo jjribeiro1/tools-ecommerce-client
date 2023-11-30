@@ -5,6 +5,7 @@ export default authMiddleware({
     '/',
     '/category/:path*',
     '/product/:path*',
+    '/cart',
     '/delivery-policy',
     '/privacy-policy',
     '/return-policy',
