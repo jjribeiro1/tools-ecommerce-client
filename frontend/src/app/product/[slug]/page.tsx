@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { TbChevronRight } from 'react-icons/tb';
+import AddToCartButton from '../AddToCartButton';
 import { getProductBySlug } from '@/lib/sanity/queries';
 import { urlFor } from '@/lib/sanity';
 
@@ -68,10 +69,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 R$ <em>{product.promotionalPrice.toFixed(2)}</em>
               </span>
             </div>
-
-            <button className="bg-[#232F3E] text-white px-4 py-2 rounded-l-full rounded-r-full w-min mt-8 hover:bg-[#232F3E]/95">
-              COMPRAR
-            </button>
+            <AddToCartButton product={product} />
           </div>
         </section>
 
