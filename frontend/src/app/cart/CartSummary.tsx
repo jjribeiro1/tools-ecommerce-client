@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { CartStoreItem } from '../store/cart';
+import { useAuth } from '@clerk/nextjs';
 
 interface CartSummaryProps {
   cartItems: CartStoreItem[];
@@ -9,6 +10,7 @@ interface CartSummaryProps {
 
 export default function CartSummary({ cartItems }: CartSummaryProps) {
   const router = useRouter();
+  const { isSignedIn } = useAuth();
 
   const totalProductsQuantity = cartItems.reduce((acc, item) => {
     return acc + item.quantity;
@@ -19,6 +21,11 @@ export default function CartSummary({ cartItems }: CartSummaryProps) {
   }, 0);
 
   const goToCheckout = async () => {
+    if (!isSignedIn) {
+      router.push('/sign-in');
+      return;
+    }
+
     const response = await fetch('/api/checkout', { method: 'POST', body: JSON.stringify(cartItems) });
     const { checkoutUrl } = await response.json();
     router.push(checkoutUrl);
