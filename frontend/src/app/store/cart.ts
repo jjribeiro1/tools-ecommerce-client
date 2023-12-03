@@ -2,7 +2,7 @@ import { ProductWithCategory } from '@/types/product';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-type CartStoreItem = {
+export type CartStoreItem = {
   product: ProductWithCategory;
   quantity: number;
 };
