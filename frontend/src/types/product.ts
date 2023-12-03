@@ -21,3 +21,8 @@ export interface Product {
 export interface ProductWithCategory extends Product {
   category: CategoryOverview;
 }
+
+export interface ProductsInfoToValidate {
+  _id: string;
+  price: number;
+}

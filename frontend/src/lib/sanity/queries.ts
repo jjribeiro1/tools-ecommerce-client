@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import { CategoryOverview, PopularCategories } from '@/types/category';
 import { sanityClient } from '.';
-import { Product, ProductWithCategory } from '@/types/product';
+import { Product, ProductWithCategory, ProductsInfoToValidate } from '@/types/product';
 import { HeroSection } from '@/types/hero-section';
 
 async function fetchCategoriesOverview() {
@@ -41,11 +41,17 @@ async function fetchProductBySlug(slug: string) {
 const getProductBySlug = cache(fetchProductBySlug);
 
 async function fetchHeroSectionData() {
-  const query = `*[_type == 'heroSection'][0]`
-  const data = await sanityClient.fetch<HeroSection>(query)
-  return data
+  const query = `*[_type == 'heroSection'][0]`;
+  const data = await sanityClient.fetch<HeroSection>(query);
+  return data;
 }
-const getHeroSectionData = cache(fetchHeroSectionData)
+const getHeroSectionData = cache(fetchHeroSectionData);
+
+async function fetchProductsInfoToValidate(id: string) {
+  const query = `*[_type == 'product' && _id == '${id}']{_id, price}[0]`;
+  const data = await sanityClient.fetch<ProductsInfoToValidate>(query);
+  return data;
+}
 
 export {
   getCategoriesOverview,
@@ -53,5 +59,6 @@ export {
   getDailyDeals,
   getProductsFromCategorySlug,
   getProductBySlug,
-  getHeroSectionData
+  getHeroSectionData,
+  fetchProductsInfoToValidate,
 };
