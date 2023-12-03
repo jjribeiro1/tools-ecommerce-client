@@ -15,14 +15,6 @@ export default function CartPage() {
   const decreaseProductQuantity = useCartStore((state) => state.decreaseProductQuantity);
   const removeProductFromCart = useCartStore((state) => state.removeProduct);
 
-  const totalProductsQuantity = cartItems.reduce((acc, item) => {
-    return acc + item.quantity;
-  }, 0);
-
-  const totalPrice = cartItems.reduce((acc, item) => {
-    return acc + item.product.price * item.quantity;
-  }, 0);
-
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -95,7 +87,7 @@ export default function CartPage() {
                   </li>
                 ))}
               </ul>
-              <CartSummary totalPrice={totalPrice} totalProductsQuantity={totalProductsQuantity} />
+              <CartSummary cartItems={cartItems} />
             </div>
           </>
         ) : (
