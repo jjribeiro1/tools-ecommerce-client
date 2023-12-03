@@ -5,8 +5,7 @@ import { WebhookEvent } from '@clerk/nextjs/server';
 import db from '@/db';
 
 export async function POST(request: Request) {
-  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET_SIGN_UP;
-
+  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET_USER;
   if (!WEBHOOK_SECRET) {
     return NextResponse.json('missing clerk webhook secret', { status: 400 });
   }
@@ -34,22 +33,46 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: 'Error verifying webhook', reason: err }, { status: 400 });
   }
 
-  if (evt.type === 'user.created') {
-    const { email_addresses, first_name, last_name, id } = evt.data;
+  if (evt.type === 'user.created' || evt.type === 'user.updated') {
+    const { id, first_name, last_name, email_addresses } = evt.data;
+    console.log(id);
 
     try {
-      await db.user.create({
-        data: {
-          email: email_addresses[0].email_address,
+      await db.user.upsert({
+        where: { externalId: id },
+        create: {
+          externalId: id as string,
           firstName: first_name,
           lastName: last_name,
-          clerkId: id,
+          email: email_addresses[0].email_address,
+        },
+        update: {
+          externalId: id,
+          firstName: first_name,
+          lastName: last_name,
+          email: email_addresses[0].email_address,
         },
       });
+
+      const status = evt.type === 'user.created' ? 201 : 200;
+      const message = evt.type === 'user.created' ? 'Created' : 'Updated';
+      return NextResponse.json({ message }, { status });
     } catch (error: any) {
       return NextResponse.json({ error, reason: error?.message });
     }
   }
 
-  return NextResponse.json('Created', { status: 201 });
+  if (evt.type === 'user.deleted') {
+    const { id } = evt.data;
+    console.log(id);
+
+    try {
+      await db.user.delete({ where: { externalId: id } });
+      return new Response(null, { status: 204 });
+    } catch (error: any) {
+      return NextResponse.json({ error, reason: error?.message });
+    }
+  }
+
+  return NextResponse.json({ message: 'Invalid event' }, { status: 400 });
 }
