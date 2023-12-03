@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { UserButton, currentUser } from '@clerk/nextjs';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import { SlHeart } from 'react-icons/sl';
 import { BsCart3 } from 'react-icons/bs';
@@ -11,7 +11,6 @@ import { getCategoriesOverview } from '@/lib/sanity/queries';
 
 export default async function Header() {
   const categories = await getCategoriesOverview();
-  const loggedUser = await currentUser();
 
   return (
     <header className="bg-header-bg w-100%">
@@ -31,20 +30,24 @@ export default async function Header() {
               <span className="hidden sm:inline">Favoritos</span>
             </div>
           </button>
-          {loggedUser ? (
-            <UserButton afterSignOutUrl='/'/>
-          ) : (
-            <div className="flex items-center gap-1">
-              <HiOutlineUserCircle className="text-white h-5 w-5 md:w-8 md:h-8" />
-              <Link href={'/sign-in'} className="text-white text-sm cursor-pointer hover:text-gray-300">
-                Olá, faça seu login
-              </Link>
-            </div>
-          )}
 
           <button className="cursor-pointer">
             <BsCart3 className="text-[#febd69] md:h-7 md:w-7" />
           </button>
+
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" afterSwitchSessionUrl='' />
+          </SignedIn>
+
+          <SignedOut>
+            <Link
+              href={'/sign-in'}
+              className="flex items-center gap-1 text-white text-sm cursor-pointer hover:text-gray-300"
+            >
+              <HiOutlineUserCircle className="text-white h-5 w-5 md:w-8 md:h-8" />
+              Olá faça seu login
+            </Link>
+          </SignedOut>
         </div>
       </div>
 
