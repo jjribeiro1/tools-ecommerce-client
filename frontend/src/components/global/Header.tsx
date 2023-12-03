@@ -31,12 +31,12 @@ export default async function Header() {
             </div>
           </button>
 
-          <button className="cursor-pointer">
+          <Link href={'/cart'} className="cursor-pointer">
             <BsCart3 className="text-[#febd69] md:h-7 md:w-7" />
-          </button>
+          </Link>
 
           <SignedIn>
-            <UserButton afterSignOutUrl="/" afterSwitchSessionUrl='' />
+            <UserButton afterSignOutUrl="/" />
           </SignedIn>
 
           <SignedOut>
