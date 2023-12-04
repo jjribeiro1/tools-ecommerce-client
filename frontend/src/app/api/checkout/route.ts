@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import db from '@/db';
+import { auth } from '@clerk/nextjs';
 import { stripe } from '@/lib/stripe';
 import { urlFor } from '@/lib/sanity';
 import { fetchProductsInfoToValidate } from '@/lib/sanity/queries';
@@ -7,6 +9,7 @@ import { CartStoreItem } from '@/app/store/cart';
 export async function POST(req: NextRequest) {
   const originUrl = req.nextUrl.origin;
   const body: CartStoreItem[] = await req.json();
+  const { userId } = auth();
 
   try {
     const productsFromSanity = await Promise.all(
@@ -26,15 +29,29 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'Não foi possível prosseguir para o checkout', reason: error });
   }
 
-  const formattedProducts = body.map(({ product, quantity }) => ({
-    _id: product._id,
-    name: product.name,
-    price: Math.round(Number(product.price * 100)),
-    quantity,
-    image: urlFor(product.images[0]).url(),
-  }));
-
   try {
+    const order = await db.order.create({
+      data: {
+        address: '',
+        externalUserId: userId!,
+        isPaid: false,
+        orderItems: body.map(({ product, quantity }) => ({
+          productExternalId: product._id,
+          productName: product.name,
+          price: product.price,
+          quantity,
+        })),
+      },
+    });
+
+    const formattedProductsToStripe = body.map(({ product, quantity }) => ({
+      _id: product._id,
+      name: product.name,
+      price: Math.round(Number(product.price * 100)),
+      quantity,
+      image: urlFor(product.images[0]).url(),
+    }));
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       currency: 'brl',
@@ -48,9 +65,13 @@ export async function POST(req: NextRequest) {
           enabled: true,
         },
       },
+      metadata: {
+        orderId: order.id,
+      },
       success_url: `${originUrl}/cart/?success=true`,
       cancel_url: `${originUrl}/cart/?canceled=true`,
-      line_items: formattedProducts.map((product) => ({
+
+      line_items: formattedProductsToStripe.map((product) => ({
         price_data: {
           currency: 'brl',
           product_data: {
