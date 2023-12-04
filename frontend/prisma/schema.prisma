@@ -14,6 +14,23 @@ model User {
   firstName  String   @map("first_name")
   lastName   String   @map("last_name")
   email      String   @unique
+  orders     Order[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Order {
+  id             String   @id @default(uuid())
+  isPaid         Boolean  @default(false)
+  address        String
+  orderItems     Json     @map("order_items")
+  user           User     @relation(fields: [externalUserId], references: [externalId])
+  externalUserId String   @map("external_id")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([externalUserId])
+  @@map("orders")
 }
