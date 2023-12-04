@@ -64,7 +64,6 @@ export async function POST(request: Request) {
 
   if (evt.type === 'user.deleted') {
     const { id } = evt.data;
-    console.log(id);
 
     try {
       await db.user.delete({ where: { externalId: id } });
