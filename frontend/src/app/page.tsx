@@ -5,10 +5,10 @@ import DailyDeals from '@/components/DailyDeals';
 
 export default async function Home() {
   return (
-    <main className="h-full w-full p-2 md:p-5 lg:py-12">
+    <div className="p-2 md:p-5 lg:py-12">
       <HeroSection />
       <TopCategories />
       <DailyDeals />
-    </main>
+    </div>
   );
 }

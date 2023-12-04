@@ -25,11 +25,11 @@ export default function ProductSortBar({ sortOptions, productsCount }: ProductSo
   );
 
   return (
-    <div className="bg-white flex items-center justify-between py-2 pl-2 rounded-md">
-      <div className="flex items-center">
-        <p className="text-xs sm:text-sm md:text-base mr-5">Ordernar por:</p>
+    <div className="bg-white flex items-center sm:justify-between gap-2 lg:gap-4 py-2 pl-2 rounded-md w-full">
+      <div className="flex items-center gap-2 lg:gap-4">
+        <p className="text-xs lg:text-sm">Ordernar por:</p>
         <Select.Root>
-          <Select.Trigger className="flex items-center gap-1 bg-[#f7f7f7] p-1 sm:p-2 rounded-md shadow-sm focus:outline-none">
+          <Select.Trigger className="text-xs lg:text-sm flex items-center gap-1 bg-[#f7f7f7] p-1 sm:p-2 rounded-md shadow-sm focus:outline-none">
             <Select.Value placeholder="Preço, menor para maior" />
             <Select.Icon>
               <TbChevronDown />
@@ -57,7 +57,7 @@ export default function ProductSortBar({ sortOptions, productsCount }: ProductSo
         </Select.Root>
       </div>
 
-      <span className="text-[#777777] text-sm mr-4">{productsCount} produtos encontrados</span>
+      <span className="text-[#777777] text-xs lg:text-sm">{productsCount} produtos encontrados</span>
     </div>
   );
 }

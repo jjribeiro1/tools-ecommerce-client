@@ -11,21 +11,25 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <li className="bg-white flex flex-col flex-none h-[370px] w-[241px] xl:w-[266px] gap-2 lg:gap-4 p-2 border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200 cursor-pointer">
-      <Link href={`/product/${product.slug.current}`}>
-        <div className="relative h-[225px] w-[225px] xl:h-[250px] xl:w-[250px]">
-          <Image
-            src={urlFor(product.images[0]).url()}
-            alt={`Oferta de ${product.name} em um preço mais baixo que o normal`}
-            fill
-            sizes="(min-width: 375px) 100%"
-            className="object-center"
-          />
+    <li>
+      <Link
+        href={`/product/${product.slug.current}`}
+        className="bg-gray-100/70 flex flex-col flex-none h-[350px] w-[200px] xl:w-[250px] border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200 cursor-pointer"
+      >
+        <div className="flex flex-col gap-1">
+          <div className="relative h-[225px]">
+            <Image
+              src={urlFor(product.images[0]).url()}
+              alt={`Imagem do produto ${product.name}`}
+              fill
+              sizes="100%"
+              className="rounded-md"
+            />
+          </div>
+          <h2 className="first-letter:capitalize pl-1 pt-1">{product.name}</h2>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <h2 className="first-letter:capitalize">{product.name}</h2>
-
+        <div className="mt-auto pb-2 pl-2">
           {product.discountIsActive ? (
             <div className="flex flex-col gap-1 w-full">
               <div className="text-sm lg:text-base text-zinc-600 flex items-center gap-4">

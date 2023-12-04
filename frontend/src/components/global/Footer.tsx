@@ -24,7 +24,7 @@ export default async function Footer() {
             </li>
 
             <li>
-              <Link href={'https://wa.me/552181031730'} target="_blank">
+              <Link href={'https://wa.me/552181052750'} target="_blank">
                 <figure className="relative h-[30px] w-[150px] sm:h-[35px] sm:w-[200px]">
                   <Image
                     src={WhatsAppButton}

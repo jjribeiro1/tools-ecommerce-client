@@ -11,9 +11,8 @@ interface NavigationBarProps {
 }
 
 export default function NavigationBar({ categories }: NavigationBarProps) {
-  
   return (
-    <Root className="bg-[#232f3e] w-full flex items-center gap-3 py-1 px-3 lg:p-3">
+    <Root className="bg-[#232f3e] w-full flex items-center gap-3 py-1.5 px-3 lg:p-3">
       <BiDialpadAlt className="text-white h-5 w-5 md:h-6 md:w-6" />
 
       <List className="text-white flex items-center md:gap-10">

@@ -18,21 +18,20 @@ export default async function Header() {
         <h1 className="text-white text-center text-xs sm:text-sm py-2">Frete grátis para todo o Brasil</h1>
       </div>
 
-      <div className="flex items-center justify-between md:justify-evenly p-2 md:py-2 md:px-3">
+      <div className="flex items-center justify-between container my-0 mx-auto px-4 py-2">
         <Logo />
-        <SearchBar />
 
-        <div className="flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-8 mr-4">
+        <div className="flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-8">
           <button className="text-white flex items-center gap-x-1 cursor-pointer">
             <SlHeart className="text-white h-4 w-4 md:h-7 md:w-7" />
-            <div className="text-[10px] md:text-xs lg:text-sm flex flex-col justify-center items-center">
-              <span className="hidden sm:inline">Meus</span>
-              <span className="hidden sm:inline">Favoritos</span>
+            <div className="hidden  text-[10px] md:text-xs lg:text-sm sm:flex flex-col justify-center items-center">
+              <span>Meus</span>
+              <span>Favoritos</span>
             </div>
           </button>
 
           <Link href={'/cart'} className="cursor-pointer">
-            <BsCart3 className="text-[#febd69] md:h-7 md:w-7" />
+            <BsCart3 className="text-[#febd69] h-4 w-4 md:h-7 md:w-7" />
           </Link>
 
           <SignedIn>
@@ -42,10 +41,10 @@ export default async function Header() {
           <SignedOut>
             <Link
               href={'/sign-in'}
-              className="flex items-center gap-1 text-white text-sm cursor-pointer hover:text-gray-300"
+              className="flex items-center gap-1 text-white cursor-pointer hover:text-gray-300"
             >
-              <HiOutlineUserCircle className="text-white h-5 w-5 md:w-8 md:h-8" />
-              Olá faça seu login
+              <HiOutlineUserCircle className="hidden sm:block text-white h-5 w-5 md:w-8 md:h-8" />
+              <span className="text-xs sm:text-sm">Olá, faça seu login</span>
             </Link>
           </SignedOut>
         </div>

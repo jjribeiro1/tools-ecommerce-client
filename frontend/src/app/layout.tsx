@@ -15,10 +15,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <ClerkProvider>
       <html lang="pt-br">
-        <body className={`${inter.className} bg-[#fafafa] max-w-screen-2xl my-0 mx-auto`}>
+        <body className={`${inter.className} bg-[#fafafa] max-w-screen-2xl min-h-[100dvh] my-0 mx-auto flex flex-col`}>
           <Providers>
             <Header />
-            {children}
+            <main className="flex-grow">{children}</main>
             <Footer />
           </Providers>
         </body>

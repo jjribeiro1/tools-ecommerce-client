@@ -33,7 +33,7 @@ export default function ProductsFromCategory({ categorySlug }: ProductsFromCateg
     <>
       <ProductSortBar sortOptions={sortOptions} productsCount={data?.length as number} />
       {isLoading && (
-        <div className="self-center mt-14 h-[684px]">
+        <div className="self-center">
           <Spinner />
         </div>
       )}
