@@ -35,7 +35,6 @@ export async function POST(request: Request) {
 
   if (evt.type === 'user.created' || evt.type === 'user.updated') {
     const { id, first_name, last_name, email_addresses } = evt.data;
-    console.log(id);
 
     try {
       await db.user.upsert({
