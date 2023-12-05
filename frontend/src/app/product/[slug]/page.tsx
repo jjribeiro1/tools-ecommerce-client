@@ -1,59 +1,37 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { TbChevronRight } from 'react-icons/tb';
+import { SlHeart } from 'react-icons/sl';
 import AddToCartButton from '../AddToCartButton';
+import ImageCarousel from './ImageCarousel';
 import { getProductBySlug } from '@/lib/sanity/queries';
-import { urlFor } from '@/lib/sanity';
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);
 
   return (
     <>
-      <main className="flex flex-col gap-6 container my-0 mx-auto p-2 min-h-screen">
+      <div className="flex flex-col gap-6 container my-0 mx-auto px-4 pt-4 pb-20">
         <nav className="py-4 border-b border-gray-300 rounded">
           <ol className="flex gap-3">
             <li className="flex items-center gap-2">
-              <Link href={'/'} className="text-sm">
+              <Link href={'/'} className="text-xs sm:text-sm">
                 Página Inicial
               </Link>
               <TbChevronRight />
             </li>
             <li className="flex items-center gap-2">
-              <Link href={`/category/${product.category.slug.current}`} className="text-sm">
+              <Link href={`/category/${product.category.slug.current}`} className="text-xs sm:text-sm">
                 {product.category.name}
               </Link>
               <TbChevronRight />
             </li>
-            <li className="text-sm">{product.name}</li>
+            <li className="text-xs sm:text-sm">{product.name}</li>
           </ol>
         </nav>
 
-        <section className="grid grid-cols-2 gap-6 border-b border-gray-300 pb-2">
-          <div className="flex gap-4">
-            <div className="flex flex-col gap-2">
-              {product.images.map((image, i) =>
-                i > 0 ? (
-                  <Image
-                    key={i}
-                    src={urlFor(image).url()}
-                    alt={`imagem do produto ${product.name}`}
-                    width={150}
-                    height={150}
-                    className="aspect-auto"
-                  />
-                ) : null
-              )}
-            </div>
-            <Image
-              src={urlFor(product.images[0]).url()}
-              alt={`imagem do produto ${product.name}`}
-              width={500}
-              height={500}
-              className="aspect-auto"
-            />
-          </div>
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-6 border-b border-gray-300 pb-10">
+          <ImageCarousel images={product.images} />
 
           <div className="flex flex-col gap-2">
             <h1 className="text-xl text-[#1C1B1B] font-semibold border-b pb-2 border-gray-300">
@@ -69,6 +47,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 R$ <em>{product.promotionalPrice.toFixed(2)}</em>
               </span>
             </div>
+
+            <button className="text-sm w-max flex items-center gap-2 px-2 py-2 rounded-md hover:bg-gray-200/50">
+              <SlHeart /> Adicionar aos favoritos
+            </button>
             <AddToCartButton product={product} />
           </div>
         </section>
@@ -77,7 +59,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
           <h2 className="text-2xl font-semibold">Descrição</h2>
           <p className="bg-white text-gray-600 p-6">{product.description}</p>
         </section>
-      </main>
+      </div>
     </>
   );
 }

@@ -1,6 +1,8 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
+import { Carousel } from 'arc-carousel';
+import 'arc-carousel/styles.css';
 import { ImageSource, urlFor } from '@/lib/sanity';
 
 interface HeroSliderProps {
@@ -8,60 +10,31 @@ interface HeroSliderProps {
 }
 
 export default function HeroSlider({ slides }: HeroSliderProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(true);
-
-  const handleDotClick = (newIndex: number) => {
-    setCurrentIndex(newIndex);
-  };
-
-  const stopAutoPlay = () => {
-    setAutoPlay(false);
-  };
-
-  useEffect(() => {
-    if (autoPlay) {
-      const autoPlayTimer = setInterval(() => {
-      const isLastIndex = currentIndex === slides.length - 1;
-        setCurrentIndex(isLastIndex ? 0 : (prevState) => prevState + 1);
-      }, 5000);
-      return () => {
-        clearInterval(autoPlayTimer);
-      };
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex]);
-
   return (
-    <div className="relative w-full h-80 sm:h-[400px] md:h-[450px] lg:h-full overflow-hidden">
-      {slides.map((slide, i) => (
-        <Image
-          key={i}
-          src={urlFor(slide).url()}
-          alt="Imagem de um produto"
-          fill
-          sizes="(min-width: 375px) 100%"
-          quality={100}
-          className={`object-cover rounded-lg h-full w-full cursor-pointer duration-500 ${
-            currentIndex === i ? 'opacity-100 z-10' : 'opacity-0 z-0'
-          }`}
-        />
-      ))}
-      <div className="z-20 absolute left-1/2 bottom-5 -translate-x-1/2 flex items-center gap-3">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            className={`cursor-pointer h-[14px] w-[14px] border ${
-              currentIndex === i ? 'bg-[#232f3e] border-[#232f3e]' : 'bg-white border-white'
-            }  rounded-full`}
-            onClick={() => {
-              handleDotClick(i);
-              stopAutoPlay();
-            }}
-          ></button>
+    <Carousel.Root
+      className="relative h-80 sm:h-[400px] md:h-[450px] lg:h-full"
+      transition='fade'
+      hasLoop
+      autoplay
+      autoplayInterval={5000}
+      transitionDuration={500}
+    >
+      <Carousel.Wrapper>
+        {slides.map((slide, i) => (
+          <Carousel.Slide key={i}>
+            <Image src={urlFor(slide).url()} alt="imagem de ferramentas" fill sizes="100%" className="object-cover" />
+          </Carousel.Slide>
         ))}
-      </div>
-    </div>
+      </Carousel.Wrapper>
+      <Carousel.PrevButton
+        type="button"
+        className="absolute top-1/2 left-0 -translate-y-1/2 z-10 bg-gray-200/50 p-1 sm:p-2"
+      />
+      <Carousel.NextButton
+        type="button"
+        className="absolute top-1/2 right-0 -translate-y-1/2 z-10  bg-gray-200/50 p-1 sm:p-2"
+      />
+      <Carousel.Pagination className="absolute -bottom-6 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-2" />
+    </Carousel.Root>
   );
 }
