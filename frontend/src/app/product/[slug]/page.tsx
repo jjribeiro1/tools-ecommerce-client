@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { TbChevronRight } from 'react-icons/tb';
 import { SlHeart } from 'react-icons/sl';
-import AddToCartButton from '../AddToCartButton';
+import AddToCartButton from './AddToCartButton';
 import ImageCarousel from './ImageCarousel';
 import { getProductBySlug } from '@/lib/sanity/queries';
 

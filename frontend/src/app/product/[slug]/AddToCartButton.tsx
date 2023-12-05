@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { useCartStore } from '../store/cart';
+import { useCartStore } from '../../store/cart';
 import { ProductWithCategory } from '@/types/product';
 
 interface AddToCartButton {
