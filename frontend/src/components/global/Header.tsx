@@ -3,10 +3,9 @@ import Link from 'next/link';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import { SlHeart } from 'react-icons/sl';
-import { BsCart3 } from 'react-icons/bs';
 import Logo from './Logo';
 import NavigationBar from '../NavigationBar';
-import SearchBar from '../SearchBar';
+import CartBadge from '../CartBadge';
 import { getCategoriesOverview } from '@/lib/sanity/queries';
 
 export default async function Header() {
@@ -21,18 +20,16 @@ export default async function Header() {
       <div className="flex items-center justify-between container my-0 mx-auto px-4 py-2">
         <Logo />
 
-        <div className="flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-8">
+        <div className="flex items-center gap-x-4 lg:gap-x-8">
           <button className="text-white flex items-center gap-x-1 cursor-pointer">
-            <SlHeart className="text-white h-4 w-4 md:h-7 md:w-7" />
+            <SlHeart className="text-white h-5 w-5 md:h-7 md:w-7" />
             <div className="hidden  text-[10px] md:text-xs lg:text-sm sm:flex flex-col justify-center items-center">
               <span>Meus</span>
               <span>Favoritos</span>
             </div>
           </button>
 
-          <Link href={'/cart'} className="cursor-pointer">
-            <BsCart3 className="text-[#febd69] h-4 w-4 md:h-7 md:w-7" />
-          </Link>
+          <CartBadge />
 
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
