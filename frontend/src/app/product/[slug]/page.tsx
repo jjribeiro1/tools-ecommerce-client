@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { TbChevronRight } from 'react-icons/tb';
-import { SlHeart } from 'react-icons/sl';
 import AddToCartButton from './AddToCartButton';
 import ImageCarousel from './ImageCarousel';
+import FavoriteButton from './FavoriteButton';
 import { getProductBySlug } from '@/lib/sanity/queries';
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
@@ -48,9 +48,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
               </span>
             </div>
 
-            <button className="text-sm w-max flex items-center gap-2 px-2 py-2 rounded-md hover:bg-gray-200/50">
-              <SlHeart /> Adicionar aos favoritos
-            </button>
+            <FavoriteButton product={product} />
             <AddToCartButton product={product} />
           </div>
         </section>
