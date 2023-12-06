@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { CartStoreItem } from '../store/cart';
+import { CartStoreItem } from '@/store/cart';
 import { useAuth } from '@clerk/nextjs';
 
 interface CartSummaryProps {

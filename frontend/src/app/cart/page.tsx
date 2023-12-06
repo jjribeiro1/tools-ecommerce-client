@@ -5,7 +5,7 @@ import { FaPlus } from 'react-icons/fa6';
 import { FaMinus } from 'react-icons/fa6';
 import CartSummary from './CartSummary';
 import EmptyCart from './EmptyCart';
-import { useCartStore } from '../store/cart';
+import { useCartStore } from '@/store/cart';
 import { urlFor } from '@/lib/sanity';
 
 export default function CartPage() {

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { FaHeart } from 'react-icons/fa6';
-import { useFavoriteItemsStore } from '@/app/store/favorites';
+import { useFavoriteItemsStore } from '@/store/favorites';
 import { ProductWithCategory } from '@/types/product';
 
 interface FavoriteButtonProps {

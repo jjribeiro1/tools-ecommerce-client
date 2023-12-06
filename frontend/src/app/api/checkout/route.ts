@@ -4,7 +4,7 @@ import { auth } from '@clerk/nextjs';
 import { stripe } from '@/lib/stripe';
 import { urlFor } from '@/lib/sanity';
 import { fetchProductsInfoToValidate } from '@/lib/sanity/queries';
-import { CartStoreItem } from '@/app/store/cart';
+import { CartStoreItem } from '@/store/cart';
 
 export async function POST(req: NextRequest) {
   const originUrl = req.nextUrl.origin;

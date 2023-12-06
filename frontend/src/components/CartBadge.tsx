@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BsCart3 } from 'react-icons/bs';
-import { useCartStore } from '@/app/store/cart';
+import { useCartStore } from '@/store/cart';
 
 export default function CartBadge() {
   const [isMounted, setIsMounted] = useState(false);
