@@ -1,30 +1,39 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { FaPlus } from 'react-icons/fa6';
 import { FaMinus } from 'react-icons/fa6';
 import CartSummary from './CartSummary';
 import EmptyCart from './EmptyCart';
+import Toast from '@/components/Toast';
 import { useCartStore } from '@/store/cart';
 import { urlFor } from '@/lib/sanity';
 
 export default function CartPage() {
   const [isMounted, setIsMounted] = useState(false);
+  const [openToast, setOpenToast] = useState(false);
   const cartItems = useCartStore((state) => state.items);
   const increaseProductQuantity = useCartStore((state) => state.increaseProductQuantity);
   const decreaseProductQuantity = useCartStore((state) => state.decreaseProductQuantity);
   const removeProductFromCart = useCartStore((state) => state.removeProduct);
+  const searchParams = useSearchParams();
+  const checkoutFail = searchParams.get('canceled') === 'true';
 
   useEffect(() => {
     setIsMounted(true);
-  }, []);
+
+    if (checkoutFail) {
+      setOpenToast(true);
+    }
+  }, [checkoutFail]);
 
   if (!isMounted) {
     return null;
   }
 
   return (
-    <main className="min-h-screen w-full">
+    <div className="min-h-screen w-full">
       <section className="container my-0 mx-auto p-4 flex flex-col gap-4">
         {cartItems.length > 0 ? (
           <>
@@ -41,7 +50,9 @@ export default function CartPage() {
                           width={100}
                           height={100}
                         />
-                        <h2 className="text-gray-600 text-xs sm:text-sm font-semibold pt-2">{item.product.name}</h2>
+                        <h2 className="text-gray-600 text-xs sm:text-sm font-semibold pt-2">
+                          {item.product.name}
+                        </h2>
                       </div>
 
                       <div className="text-xs sm:text-sm sm:justify-self-center flex flex-col items-center gap-2">
@@ -94,6 +105,13 @@ export default function CartPage() {
           <EmptyCart />
         )}
       </section>
-    </main>
+
+      <Toast
+        open={openToast}
+        onOpenChange={setOpenToast}
+        title="Algo inesperado aconteceu"
+        description="Não foi possível prosseguir com o pagamento"
+      />
+    </div>
   );
 }
