@@ -20,9 +20,11 @@ export default function CartBadge() {
   return (
     <Link href={'/cart'} className="relative">
       <BsCart3 className="text-[#febd69] h-5 w-5 md:h-7 md:w-7" />
-      <span className="bg-red-500 text-white absolute -top-1 -right-2 h-4 w-4 flex items-center justify-center rounded-full text-xs">
-        {cartItemsQuantity}
-      </span>
+      {items.length > 0 && (
+        <span className="bg-red-500 text-white absolute -top-1 -right-2 h-4 w-4 flex items-center justify-center rounded-full text-xs">
+          {cartItemsQuantity}
+        </span>
+      )}
     </Link>
   );
 }
