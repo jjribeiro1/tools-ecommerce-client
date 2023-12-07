@@ -1,8 +1,9 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { CartStoreItem } from '@/store/cart';
+import Link from 'next/link';
 import { useAuth } from '@clerk/nextjs';
+import { CartStoreItem } from '@/store/cart';
 
 interface CartSummaryProps {
   cartItems: CartStoreItem[];
@@ -32,7 +33,7 @@ export default function CartSummary({ cartItems }: CartSummaryProps) {
   };
 
   return (
-    <div className="bg-gray-100 flex flex-col p-4 gap-4 rounded-lg w-[25%]">
+    <div className="bg-gray-100 flex flex-col p-4 gap-4 rounded-lg max-w-sm sm:w-[25%]">
       <h3 className="font-semibold">Resumo do pedido</h3>
 
       <div className="flex justify-between pb-3 border-b border-gray-500">
@@ -51,6 +52,8 @@ export default function CartSummary({ cartItems }: CartSummaryProps) {
       >
         Continuar
       </button>
+
+      <Link href={'/'} className='text-gray-600 text-center hover:text-gray-900'>Adicionar mais produtos</Link>
     </div>
   );
 }

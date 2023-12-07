@@ -29,25 +29,25 @@ export default function CartPage() {
         {cartItems.length > 0 ? (
           <>
             <h1 className="text-2xl text-gray-900 font-bold">Meu carrinho</h1>
-            <div className="flex justify-between gap-4 w-full">
-              <ul className="flex flex-col gap-8 w-[75%]">
+            <div className="flex flex-col gap-8 w-full sm:gap-4 md:flex-row md:justify-between">
+              <ul className="flex flex-col gap-8 w-full md:w-[75%]">
                 {cartItems.map((item) => (
                   <li key={item.product._id}>
-                    <div className="grid grid-cols-3 border rounded-lg p-2">
-                      <div className="flex gap-2">
+                    <div className="grid grid-cols-3 gap-4 sm:gap-0 border rounded-lg p-1 sm:p-2">
+                      <div className="flex gap-2 col-span-3 sm:col-span-1">
                         <Image
                           src={urlFor(item.product.images[0]).url()}
                           alt={`Imagem do produto ${item.product.name}`}
                           width={100}
                           height={100}
                         />
-                        <h2 className="text-gray-600 font-semibold pt-2">{item.product.name}</h2>
+                        <h2 className="text-gray-600 text-xs sm:text-sm font-semibold pt-2">{item.product.name}</h2>
                       </div>
 
-                      <div className="justify-self-center flex flex-col items-center gap-2">
+                      <div className="text-xs sm:text-sm sm:justify-self-center flex flex-col items-center gap-2">
                         <p>Quantidade</p>
 
-                        <div className="grid grid-cols-3 place-items-center gap-2">
+                        <div className="grid grid-cols-3 place-items-center gap-0.5 sm:gap-2">
                           <button
                             onClick={() => decreaseProductQuantity(item)}
                             type="button"
@@ -77,7 +77,7 @@ export default function CartPage() {
                         </button>
                       </div>
 
-                      <div className="justify-self-center flex flex-col items-center gap-2">
+                      <div className="text-xs sm:text-sm sm:justify-self-center flex flex-col items-center gap-2">
                         <p>Preço</p>
                         <span className="font-semibold">
                           R$ {(item.product.price * item.quantity).toFixed(2)}
