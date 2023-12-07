@@ -13,6 +13,7 @@ interface CartStore {
   removeProduct(productId: string): void;
   increaseProductQuantity(data: CartStoreItem): void;
   decreaseProductQuantity(data: CartStoreItem): void;
+  resetStore(): void;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -48,6 +49,10 @@ export const useCartStore = create<CartStore>()(
         }
         get().items[findIndex] = { product: data.product, quantity: data.quantity - 1 };
         set({ items: [...get().items] });
+      },
+
+      resetStore() {
+        set({ items: [] });
       },
     }),
 

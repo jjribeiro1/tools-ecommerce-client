@@ -6,6 +6,7 @@ interface FavoriteItemsStore {
   items: ProductWithCategory[];
   addToFavorites(data: ProductWithCategory): void;
   removeFromFavorites(productId: string): void;
+  resetStore(): void;
 }
 
 export const useFavoriteItemsStore = create<FavoriteItemsStore>()(
@@ -23,6 +24,10 @@ export const useFavoriteItemsStore = create<FavoriteItemsStore>()(
 
       removeFromFavorites(productId) {
         set({ items: [...get().items.filter((item) => item._id !== productId)] });
+      },
+
+      resetStore() {
+        set({ items: [] });
       },
     }),
     {
