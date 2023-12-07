@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { TbChevronRight } from 'react-icons/tb';
-import AddToCartButton from './AddToCartButton';
+import BuyProductButton from './BuyProductButton';
 import ImageCarousel from './ImageCarousel';
 import { getProductBySlug } from '@/lib/sanity/queries';
 
@@ -47,7 +47,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
               </span>
             </div>
 
-            <AddToCartButton product={product} />
+            <BuyProductButton product={product} />
           </div>
         </section>
 
