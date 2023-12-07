@@ -32,7 +32,7 @@ export default async function Header() {
               href={'/sign-in'}
               className="flex items-center gap-1 text-white cursor-pointer hover:text-gray-300"
             >
-              <HiOutlineUserCircle className="hidden sm:block text-white h-5 w-5 md:w-8 md:h-8" />
+              <HiOutlineUserCircle className="hidden sm:block text-white h-6 w-6 md:w-8 md:h-8" />
               <span className="text-xs sm:text-sm">Olá, faça seu login</span>
             </Link>
           </SignedOut>
