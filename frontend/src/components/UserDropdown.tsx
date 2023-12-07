@@ -5,9 +5,11 @@ import { useUser } from '@clerk/nextjs';
 import { SignOutButton } from '@clerk/nextjs';
 import * as Avatar from '@radix-ui/react-avatar';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useCartStore } from '@/store/cart';
 
 export default function AvatarComponent() {
   const { user } = useUser();
+  const resetCartStore = useCartStore((state) => state.resetStore);
   const avatarLetter = user?.firstName?.at(0);
 
   return (
@@ -36,7 +38,7 @@ export default function AvatarComponent() {
           >
             Meus pedidos
           </Link>
-          <SignOutButton>
+          <SignOutButton signOutCallback={() => resetCartStore()}>
             <button className="text-xs sm:text-sm px-4 py-2 rounded-b-md cursor-pointer hover:bg-gray-200">
               Sair
             </button>
