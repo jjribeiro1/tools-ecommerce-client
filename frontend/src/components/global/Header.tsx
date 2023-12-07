@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
-import { SlHeart } from 'react-icons/sl';
 import Logo from './Logo';
 import NavigationBar from '../NavigationBar';
 import CartBadge from '../CartBadge';
+import UserDropdown from '../UserDropdown';
 import { getCategoriesOverview } from '@/lib/sanity/queries';
 
 export default async function Header() {
@@ -24,7 +24,7 @@ export default async function Header() {
           <CartBadge />
 
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <UserDropdown/>
           </SignedIn>
 
           <SignedOut>
