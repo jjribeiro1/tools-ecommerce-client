@@ -21,14 +21,6 @@ export default async function Header() {
         <Logo />
 
         <div className="flex items-center gap-x-4 lg:gap-x-8">
-          <button className="text-white flex items-center gap-x-1 cursor-pointer">
-            <SlHeart className="text-white h-5 w-5 md:h-7 md:w-7" />
-            <div className="hidden  text-[10px] md:text-xs lg:text-sm sm:flex flex-col justify-center items-center">
-              <span>Meus</span>
-              <span>Favoritos</span>
-            </div>
-          </button>
-
           <CartBadge />
 
           <SignedIn>

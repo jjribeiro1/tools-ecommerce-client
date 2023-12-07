@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { TbChevronRight } from 'react-icons/tb';
 import AddToCartButton from './AddToCartButton';
 import ImageCarousel from './ImageCarousel';
-import FavoriteButton from './FavoriteButton';
 import { getProductBySlug } from '@/lib/sanity/queries';
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
@@ -48,7 +47,6 @@ export default async function ProductPage({ params }: { params: { slug: string }
               </span>
             </div>
 
-            <FavoriteButton product={product} />
             <AddToCartButton product={product} />
           </div>
         </section>
