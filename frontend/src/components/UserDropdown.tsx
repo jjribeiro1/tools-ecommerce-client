@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import { SignOutButton } from '@clerk/nextjs';
 import * as Avatar from '@radix-ui/react-avatar';
@@ -9,6 +10,7 @@ import { useCartStore } from '@/store/cart';
 
 export default function AvatarComponent() {
   const { user } = useUser();
+  const router = useRouter();
   const resetCartStore = useCartStore((state) => state.resetStore);
   const avatarLetter = user?.firstName?.at(0);
 
@@ -38,7 +40,12 @@ export default function AvatarComponent() {
           >
             Meus pedidos
           </Link>
-          <SignOutButton signOutCallback={() => resetCartStore()}>
+          <SignOutButton
+            signOutCallback={() => {
+              resetCartStore();
+              router.push('/');
+            }}
+          >
             <button className="text-xs sm:text-sm px-4 py-2 rounded-b-md cursor-pointer hover:bg-gray-200">
               Sair
             </button>
