@@ -26,7 +26,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="rounded-md"
             />
           </div>
-          <h2 className="first-letter:capitalize pl-1 pt-1">{product.name}</h2>
+          <h2 className="first-letter:capitalize pl-1 pt-1 truncate">{product.name}</h2>
         </div>
 
         <div className="mt-auto pb-2 pl-2">

@@ -12,7 +12,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
     <>
       <div className="flex flex-col gap-6 container my-0 mx-auto px-4 pt-4 pb-20">
         <nav className="py-4 border-b border-gray-300 rounded">
-          <ol className="flex gap-3">
+          <ol className="flex flex-wrap gap-3">
             <li className="flex items-center gap-2">
               <Link href={'/'} className="text-xs sm:text-sm">
                 Página Inicial
