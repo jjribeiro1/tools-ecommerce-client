@@ -25,8 +25,12 @@ export default function ImageCarousel({ images }: ProductImageCarouselProps) {
           </Carousel.Slide>
         ))}
       </Carousel.Wrapper>
-      <Carousel.PrevButton className="absolute top-1/2 left-0 -translate-y-1/2 z-10 bg-slate-200/50 p-1 sm:p-2" />
-      <Carousel.NextButton className="absolute top-1/2 right-0 -translate-y-1/2 z-10  bg-slate-200/50 p-1 sm:p-2" />
+      {images.length > 1 && (
+        <Carousel.PrevButton className="absolute top-1/2 left-0 -translate-y-1/2 z-10 bg-slate-200/50 p-1 sm:p-2" />
+      )}
+      {images.length > 1 && (
+        <Carousel.NextButton className="absolute top-1/2 right-0 -translate-y-1/2 z-10  bg-slate-200/50 p-1 sm:p-2" />
+      )}
       <Carousel.Pagination className="absolute -bottom-7 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-2" />
     </Carousel.Root>
   );
