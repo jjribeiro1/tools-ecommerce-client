@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/db';
 import { auth } from '@clerk/nextjs';
 import { stripe } from '@/lib/stripe';
@@ -43,6 +44,8 @@ export async function POST(req: NextRequest) {
         })),
       },
     });
+
+    revalidatePath('/orders', 'page');
 
     const formattedProductsToStripe = body.map(({ product, quantity }) => ({
       _id: product._id,
