@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FaPlus } from 'react-icons/fa6';
 import { FaMinus } from 'react-icons/fa6';
@@ -18,6 +18,7 @@ export default function CartPage() {
   const decreaseProductQuantity = useCartStore((state) => state.decreaseProductQuantity);
   const removeProductFromCart = useCartStore((state) => state.removeProduct);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const checkoutFail = searchParams.get('canceled') === 'true';
 
   useEffect(() => {
@@ -50,7 +51,10 @@ export default function CartPage() {
                           width={100}
                           height={100}
                         />
-                        <h2 className="text-gray-600 text-xs sm:text-sm font-semibold pt-2">
+                        <h2
+                          onClick={() => router.push(`/product/${item.product.slug.current}`)}
+                          className="text-gray-600 text-xs sm:text-sm font-semibold pt-2 cursor-pointer"
+                        >
                           {item.product.name}
                         </h2>
                       </div>
