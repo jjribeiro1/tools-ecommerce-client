@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroSection from '@/components/HeroSection';
-import TopCategories from '@/components/TopCategories';
+import TopCategories from '@/components/TopCategories/TopCategories';
 import DailyDeals from '@/components/DailyDeals/DailyDeals';
 
 export default async function Home() {
