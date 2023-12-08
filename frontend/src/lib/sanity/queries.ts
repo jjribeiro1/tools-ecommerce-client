@@ -16,7 +16,7 @@ async function getPopularCategories() {
 }
 
 async function getDailyDeals() {
-  const query = `*[_type == 'product' && dailyDeal == true]`;
+  const query = `*[_type == 'product' && dailyDeal == true] | order(_createdAt desc)`;
   const data = await sanityClient.fetch<Product[]>(query);
   return data;
 }
