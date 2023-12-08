@@ -54,7 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           ) : (
             <div className="text-sm lg:text-base">
               <span className=" inline-flex gap-1">
-                <strong className="text-slate-900">R$ {product.promotionalPrice.toFixed(2)}</strong>
+                <strong className="text-slate-900">R$ {product.price.toFixed(2)}</strong>
               </span>
             </div>
           )}
