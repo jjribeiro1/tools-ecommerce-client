@@ -14,7 +14,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     <li>
       <Link
         href={`/product/${product.slug.current}`}
-        className="bg-gray-100/70 flex flex-col flex-none h-[350px] w-[200px] xl:w-[250px] border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200 cursor-pointer"
+        className="bg-gray-100/70 flex flex-col h-[350px] max-w-[250px] border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200 cursor-pointer"
       >
         <div className="flex flex-col gap-1">
           <div className="relative h-[225px]">
