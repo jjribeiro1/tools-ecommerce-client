@@ -39,7 +39,12 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
             <div className="flex flex-col gap-2 border-b border-gray-300 pb-2">
               {product.discountIsActive ? (
-                <span className="line-through text-gray-400/90">R$ {product.price.toFixed(2)}</span>
+                <div className="flex items-center gap-5 sm:gap-10">
+                  <span className="line-through text-gray-400/90">R$ {product.price.toFixed(2)}</span>
+                  <span className="text-xs sm:text-sm inline-block bg-green-600 text-gray-200 px-1 py-0.5 rounded-sm">
+                    Produto em promoção
+                  </span>
+                </div>
               ) : null}
 
               <span className="font-semibold text-lg text-green-800 tracking-tight">
