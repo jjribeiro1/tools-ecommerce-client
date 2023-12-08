@@ -11,7 +11,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <li>
+    <div>
       <Link
         href={`/product/${product.slug.current}`}
         className="bg-gray-100/70 flex flex-col h-[350px] max-w-[250px] border border-transparent rounded-md hover:border-slate-600 transition-colors duration-200 cursor-pointer"
@@ -60,6 +60,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
       </Link>
-    </li>
+    </div>
   );
 }
