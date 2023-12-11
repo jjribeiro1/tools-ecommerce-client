@@ -10,7 +10,7 @@ export default authMiddleware({
     '/privacy-policy',
     '/return-policy',
     '/terms',
-    "/api/webhooks/clerk/:path",
+    "/api/webhooks/clerk/:path*",
     "/sign-in",
     "/sign-up"
   ],
