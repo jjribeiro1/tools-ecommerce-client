@@ -57,7 +57,7 @@ export default function ProductSortBar({ sortOptions, productsCount }: ProductSo
         </Select.Root>
       </div>
 
-      <span className="text-[#777777] text-xs lg:text-sm">{productsCount} produtos encontrados</span>
+      <span className="text-[#777777] text-xs lg:text-sm pr-2">{productsCount} produtos encontrados</span>
     </div>
   );
 }
