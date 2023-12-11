@@ -95,7 +95,10 @@ export default function CartPage() {
                       <div className="text-xs sm:text-sm sm:justify-self-center flex flex-col items-center gap-2">
                         <p>Preço</p>
                         <span className="font-semibold">
-                          R$ {(item.product.price * item.quantity).toFixed(2)}
+                          R$
+                          {item.product.discountIsActive
+                            ? (item.product.promotionalPrice * item.quantity).toFixed(2)
+                            : (item.product.price * item.quantity).toFixed(2)}
                         </span>
                       </div>
                     </div>

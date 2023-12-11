@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         orderItems: body.map(({ product, quantity }) => ({
           productExternalId: product._id,
           productName: product.name,
-          price: product.price,
+          price: product.discountIsActive ? product.promotionalPrice : product.price,
           quantity,
         })),
       },
@@ -50,7 +50,9 @@ export async function POST(req: NextRequest) {
     const formattedProductsToStripe = body.map(({ product, quantity }) => ({
       _id: product._id,
       name: product.name,
-      price: Math.round(Number(product.price * 100)),
+      price: product.discountIsActive
+        ? Math.round(Number(product.promotionalPrice * 100))
+        : Math.round(Number(product.price * 100)),
       quantity,
       image: urlFor(product.images[0]).url(),
     }));
@@ -71,7 +73,7 @@ export async function POST(req: NextRequest) {
       metadata: {
         orderId: order.id,
       },
-      success_url: `${originUrl}/cart/?success=true`,
+      success_url: `${originUrl}/orders`,
       cancel_url: `${originUrl}/cart/?canceled=true`,
 
       line_items: formattedProductsToStripe.map((product) => ({

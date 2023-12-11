@@ -18,6 +18,9 @@ export default function CartSummary({ cartItems }: CartSummaryProps) {
   }, 0);
 
   const totalPrice = cartItems.reduce((acc, item) => {
+    if (item.product.discountIsActive) {
+      return acc + item.product.promotionalPrice * item.quantity;
+    }
     return acc + item.product.price * item.quantity;
   }, 0);
 
@@ -53,7 +56,9 @@ export default function CartSummary({ cartItems }: CartSummaryProps) {
         Continuar
       </button>
 
-      <Link href={'/'} className='text-gray-600 text-center hover:text-gray-900'>Adicionar mais produtos</Link>
+      <Link href={'/'} className="text-gray-600 text-center hover:text-gray-900">
+        Adicionar mais produtos
+      </Link>
     </div>
   );
 }
