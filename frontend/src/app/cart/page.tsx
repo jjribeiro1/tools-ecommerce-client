@@ -12,22 +12,30 @@ import { urlFor } from '@/lib/sanity';
 
 export default function CartPage() {
   const [isMounted, setIsMounted] = useState(false);
-  const [openToast, setOpenToast] = useState(false);
+  const [openCheckoutFailToast, setOpenCheckoutFailToast] = useState(false);
+  const [openCheckoutSuccessToast, setOpenCheckoutSuccessToast] = useState(false);
   const cartItems = useCartStore((state) => state.items);
   const increaseProductQuantity = useCartStore((state) => state.increaseProductQuantity);
   const decreaseProductQuantity = useCartStore((state) => state.decreaseProductQuantity);
   const removeProductFromCart = useCartStore((state) => state.removeProduct);
+  const resetStore = useCartStore((state) => state.resetStore);
   const searchParams = useSearchParams();
   const router = useRouter();
+  const checkoutSuccess = searchParams.get('success') === 'true';
   const checkoutFail = searchParams.get('canceled') === 'true';
 
   useEffect(() => {
     setIsMounted(true);
 
-    if (checkoutFail) {
-      setOpenToast(true);
+    if (checkoutSuccess) {
+      resetStore();
+      setOpenCheckoutSuccessToast(true);
     }
-  }, [checkoutFail]);
+    if (checkoutFail) {
+      setOpenCheckoutFailToast(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkoutSuccess, checkoutFail]);
 
   if (!isMounted) {
     return null;
@@ -114,10 +122,17 @@ export default function CartPage() {
       </section>
 
       <Toast
-        open={openToast}
-        onOpenChange={setOpenToast}
+        open={openCheckoutFailToast}
+        onOpenChange={setOpenCheckoutFailToast}
         title="Algo inesperado aconteceu"
         description="Não foi possível prosseguir com o pagamento"
+      />
+
+      <Toast
+        open={openCheckoutSuccessToast}
+        onOpenChange={setOpenCheckoutSuccessToast}
+        title="Pagamento efetuado com sucesso"
+        description="Você já pode visualizar os detalhes do seu pedido"
       />
     </div>
   );

@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
       metadata: {
         orderId: order.id,
       },
-      success_url: `${originUrl}/orders`,
+      success_url: `${originUrl}/cart?success=true`,
       cancel_url: `${originUrl}/cart/?canceled=true`,
 
       line_items: formattedProductsToStripe.map((product) => ({
