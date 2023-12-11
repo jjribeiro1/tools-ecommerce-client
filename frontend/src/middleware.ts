@@ -11,6 +11,7 @@ export default authMiddleware({
     '/return-policy',
     '/terms',
     "/api/webhooks/clerk/:path*",
+    "/api/webhooks/stripe/:path*",
     "/sign-in",
     "/sign-up"
   ],
