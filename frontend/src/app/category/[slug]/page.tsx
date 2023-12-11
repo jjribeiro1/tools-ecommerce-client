@@ -3,7 +3,13 @@ import Link from 'next/link';
 import ProductsFromCategory from '@/components/ProductsFromCategory';
 import { getCategoriesOverview } from '@/lib/sanity/queries';
 
-export default async function Category({ params }: { params: { slug: string } }) {
+export default async function Category({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: { preco: string };
+}) {
   const categories = await getCategoriesOverview();
 
   return (
@@ -20,7 +26,7 @@ export default async function Category({ params }: { params: { slug: string } })
       </div>
 
       <div className="flex flex-col gap-4 w-full">
-        <ProductsFromCategory categorySlug={params.slug} />
+        <ProductsFromCategory categorySlug={params.slug} priceOrder={searchParams.preco} />
       </div>
     </section>
   );

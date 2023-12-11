@@ -1,21 +1,18 @@
 'use client';
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Product } from '@/types/product';
-import ProductList from './ProductList';
-import { getProductsFromCategorySlug } from '@/lib/sanity/queries';
 import ProductSortBar from './ProductSortBar';
 import Spinner from './Spinner';
-import { useSearchParams } from 'next/navigation';
+import ProductList from './ProductList';
+import { Product } from '@/types/product';
+import { getProductsFromCategorySlug } from '@/lib/sanity/queries';
 
 interface ProductsFromCategoryProps {
   categorySlug: string;
+  priceOrder: string;
 }
 
-export default function ProductsFromCategory({ categorySlug }: ProductsFromCategoryProps) {
-  const searchParams = useSearchParams();
-  const priceOrder = searchParams.get('preco') as string;
-
+export default function ProductsFromCategory({ categorySlug, priceOrder }: ProductsFromCategoryProps) {
   const sortOptions = [
     { label: 'Preço, menor para maior', name: 'preco', value: 'asc' },
     { label: 'Preço, maior para menor', name: 'preco', value: 'desc' },
