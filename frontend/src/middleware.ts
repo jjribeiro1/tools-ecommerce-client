@@ -10,7 +10,7 @@ export default authMiddleware({
     '/privacy-policy',
     '/return-policy',
     '/terms',
-    "/api/webhooks(.*)"
+    "/api/webhooks/clerk/user"
   ],
 });
 
